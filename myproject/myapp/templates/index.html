@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HelpDesk</title>
+</head>
+<body>
+    <header style="display: flex; padding: 20px; gap: 100px">
+    {% if user.is_authenticated %}
+  <p style="font-size:20px">Привет, {{ user.username }}!</p>
+  <a href="{% url 'logout' %}" style="text-decoration: none; font-size:20px">Выйти</a>
+    {% else %}
+  <a href="{% url 'register' %}" style="text-decoration: none; font-size:20px">Регистрация</a>
+  <a href="{% url 'login' %}" style="text-decoration: none; font-size:20px">Войти</a>
+    {% endif %}
+
+        <h1>Welcome to HelpDesk</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'create-problem' %}" style="text-decoration: none; font-size:20px">Create Problem</a></li>
+            <li><a href="{% url 'problem-list' %}" style="text-decoration: none; font-size:20px">Problem List</a></li>
+        </ul>
+    </nav>
+</body>
+</html>

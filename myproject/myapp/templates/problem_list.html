@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Problem List</title>
+</head>
+<body>
+    <h1>Problem List</h1>
+<table>
+    <thead>
+    </thead>
+    <tbody>
+        {% for problem in problems %}
+            <div style="border: 1px solid black; width: 40%; height: 270px; border-radius: 20px; align-text: center">
+                <p>Имя: {{ problem.name }}</p>
+                <p>Телефон: {{ problem.phone }}</p>
+                <p>Мейл: {{ problem.email }}</p>
+                <p>Описание: {{ problem.description }}</p>
+                <p>Приоритет: {{ problem.get_priority_display }}</p>
+                <p>Дата создания: {{ problem.created_at }}</p>
+                <a href="{% url 'problem-detail' problem.id %}">Подробнее..</a>
+            </div>
+        {% empty %}
+            <tr>
+                <p colspan="6">No problems found.</p>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</body>
+</html>

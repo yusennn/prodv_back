@@ -1,0 +1,34 @@
+<form method="post">
+    {% csrf_token %}
+    <label for="actions">Actions:</label>
+    <textarea name="actions" id="actions"></textarea>
+    <body>
+    <h1>Problem Details</h1>
+    <p><strong>Name:</strong> {{ problem.name }}</p>
+    <p><strong>Phone:</strong> {{ problem.phone }}</p>
+    <p><strong>Email:</strong> {{ problem.email }}</p>
+    <p><strong>Description:</strong> {{ problem.description }}</p>
+    <p><strong>Priority:</strong> {{ problem.get_priority_display }}</p>
+    <p><strong>Status:</strong> {{ problem.status }}</p>
+    <p><strong>Actions:</strong> {{ problem.actions }}</p>
+    <p><strong>Created At:</strong> {{ problem.created_at }}</p>
+    <a href="{% url 'problem-list' %}">Back to Problem List</a>
+</body>
+    <label for="status">Status:</label>
+    <select name="status" id="status">
+        <option value="new">New</option>
+        <option value="in_progress">In Progress</option>
+        <option value="resolved">Resolved</option>
+        {% if is_tester %}
+        <option value="confirmed">Confirmed</option>
+        {% endif %}
+    </select>
+    <label for="assigned_user">Assigned User:</label>
+    <select name="assigned_user" id="assigned_user">
+        <option value="{{ problem.assigned_user.id }}" selected>{{ problem.assigned_user.username }}</option>
+        {% for user in reception_users %}
+            <option value="{{ user.id }}">{{ user.username }}</option>
+        {% endfor %}
+    </select>
+    <button type="submit">Save</button>
+</form>
